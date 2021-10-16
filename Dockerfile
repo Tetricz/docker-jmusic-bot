@@ -22,5 +22,6 @@ WORKDIR /jmusic-bot
 
 COPY ./config.txt.sample /config.txt.sample
 COPY ./entrypoint.sh /jmusic-bot/
+RUN chmod +x /jmusic-bot/entrypoint.sh
 
 ENTRYPOINT [ "./entrypoint.sh" ]
