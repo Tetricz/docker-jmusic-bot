@@ -3,8 +3,6 @@ ARG OPENJDK_VERSION=16-alpine
 # https://hub.docker.com/_/openjdk
 FROM openjdk:${OPENJDK_VERSION}
 
-COPY ./config.txt.sample /config.txt.sample
-
 RUN apk add --no-cache gettext curl
 RUN curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
     -o /$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/') \
@@ -21,5 +19,8 @@ ENV COMMAND_PREFIX='@mention' \
     LYRICS_DEFUALT='A-Z Lyrics'
 
 WORKDIR /jmusic-bot
+
+COPY ./config.txt.sample /config.txt.sample
+COPY ./entrypoint.sh /jmusic-bot/
 
 ENTRYPOINT [ "./entrypoint.sh" ]
