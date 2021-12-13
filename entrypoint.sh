@@ -1,4 +1,5 @@
 #!/bin/sh
+cd /jmusic-bot
 if ! test -f "./config.txt"; then
     envsubst < "/config.txt.sample" > "./config.txt"
 fi

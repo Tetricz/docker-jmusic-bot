@@ -21,7 +21,7 @@ ENV COMMAND_PREFIX='@mention' \
 WORKDIR /jmusic-bot
 
 COPY ./config.txt.sample /config.txt.sample
-COPY ./entrypoint.sh /jmusic-bot/
-RUN chmod +x /jmusic-bot/entrypoint.sh
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
