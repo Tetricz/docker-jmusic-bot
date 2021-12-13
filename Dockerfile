@@ -4,10 +4,10 @@ ARG OPENJDK_VERSION=16-alpine
 FROM openjdk:${OPENJDK_VERSION}
 
 RUN apk add --no-cache gettext curl
-RUN curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
-    -o /$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/') \
-    && mkdir /jmusic-bot \
-    && mv /JMusic* /jmusic-bot/
+#RUN curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
+#    -o /$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/') \
+#    && mkdir /jmusic-bot \
+#    && mv /JMusic* /jmusic-bot/
 
 ENV COMMAND_PREFIX='@mention' \
     ALT_COMMAND_PREFIX='' \
