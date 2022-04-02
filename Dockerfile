@@ -3,8 +3,7 @@ ARG OPENJDK_VERSION=16-alpine
 # https://hub.docker.com/_/openjdk
 FROM openjdk:${OPENJDK_VERSION}
 
-RUN \\
-    if [ $(uname -p) = "x86_64" ]; \\
+RUN if [ $(uname -p) = "x86_64" ]; \\
     then \\
         apk add --no-cache gettext curl \\
     else \\
