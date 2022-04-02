@@ -5,11 +5,6 @@ FROM openjdk:${OPENJDK_VERSION}
 
 RUN if [ $(uname -m) = "x86_64" ]; then apk add --no-cache gettext curl; else apt-get update && apt-get install gettext curl -y && apt-get clean; fi
 
-#RUN curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
-#    -o /$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/') \
-#    && mkdir /jmusic-bot \
-#    && mv /JMusic* /jmusic-bot/
-
 ENV COMMAND_PREFIX='@mention' \
     ALT_COMMAND_PREFIX='' \
     BOT_OWNER='' \
