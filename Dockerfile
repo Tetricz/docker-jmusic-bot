@@ -3,8 +3,9 @@ ARG OPENJDK_VERSION=16-alpine
 # https://hub.docker.com/_/openjdk
 FROM openjdk:${OPENJDK_VERSION}
 
-RUN if [ $(uname -p) = "x86_64" ]; then apk add --no-cache gettext curl; else apt-get install gettext curl; fi
-RUN uname =p
+RUN uname -p
+RUN if [ $(uname -p) = "x86_64" ]; then apk add --no-cache gettext curl; else apt-get update && apt-get install gettext curl; fi
+
 #RUN curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
 #    -o /$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/') \
 #    && mkdir /jmusic-bot \
