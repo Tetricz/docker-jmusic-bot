@@ -12,7 +12,9 @@ if [ ! -e ./JMusic* ]; then
 	echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/' > /jmusic-bot/.version
 elif [ -e ./.version ]; then
 	online=$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/')
+	echo "Online Version: ${online}"
 	current=$(cat /jmusic-bot/.version)
+	echo "Current Version: ${current}"
 	if [ -n ${online} ]; then
 		if [ ${online} != ${current} ]; then
 			echo "Version mismatch\nDowloadning latest version..."
