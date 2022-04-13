@@ -17,7 +17,27 @@ elif [ -e ./.version ]; then
 	echo "Current Version: ${current}"
 	if [ -n ${online} ]; then
 		if [ ${online} != ${current} ]; then
-			echo "Version mismatch\nDowloadning latest version..."
+			echo "Version mismatch"
+			echo "Downloading latest version..."
+			curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
+			-o /jmusic-bot/$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/')
+			echo "Removing old version"
+			rm -v ${current}
+			echo "Setting current version"
+			echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/' > /jmusic-bot/.version
+		fi
+	else
+		echo "Check internet connection or dns settings"
+	fi
+elif [ ! -e ./.version ]; then
+	online=$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/')
+	echo "Online Version: ${online}"
+	current=$(cat /jmusic-bot/.version)
+	echo "Current Version: ${current}"
+	if [ -n ${online} ]; then
+		if [ ${online} != ${current} ]; then
+			echo "Version mismatch"
+			echo "Downloading latest version..."
 			curl -L $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') \
 			-o /jmusic-bot/$(echo $(curl -s https://api.github.com/repos/jagrosh/MusicBot/releases/latest | grep -i 'browser_download_url.*\.jar' | sed 's/.*\(http.*\)"/\1/') | sed 's/.*\/\([^\/]*\)/\1/')
 			echo "Removing old version"
